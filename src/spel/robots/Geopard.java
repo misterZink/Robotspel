@@ -8,11 +8,11 @@ public class Geopard extends Robot {
     private int antalVila;
 
     public Geopard() {
+        displaySymbol = 'G';
         isHungry = true;
         isTired = false;
         antalVila = 0;
     }
-
 
     public void eatZebra(Zebra z) {
         z.setDead(true);

@@ -7,6 +7,7 @@ public class Zebra extends Robot {
     //Default konstruktor, Zebran lever när man skapar objektet
     public Zebra() {
         isDead = false;
+        displaySymbol = 'Z';
     }
 
     // Getter, returnerar boolean isDead till den som anropar metoden
