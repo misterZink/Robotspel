@@ -8,6 +8,7 @@ public class Geopard extends Robot {
     private int antalVila;
 
     public Geopard() {
+        displaySymbol = 'G';
         isHungry = true;
         isTired = false;
         antalVila = 0;
@@ -40,4 +41,6 @@ public class Geopard extends Robot {
     public void setAntalVila(int antalVila) {
         this.antalVila = antalVila;
     }
+
+
 }
