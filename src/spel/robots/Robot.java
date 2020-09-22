@@ -61,8 +61,8 @@ public class Robot {
     {
         riktning U = riktning.UP;
         riktning D = riktning.DOWN;
-        riktning.R = riktning.RIGHT;
-        riktning.L = riktning.LEFT;
+        //riktning.R = riktning.RIGHT;
+        //riktning.L = riktning.LEFT;
 
     }
 }
