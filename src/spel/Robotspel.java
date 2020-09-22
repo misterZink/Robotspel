@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Robotspel {
     int zebraAmount = 0, geopardAmount = 0;
 
-    public Robotspel() 
+    public Robotspel() {
         while (!countRobots()) {
             askAmountOfRobots();
         }
