@@ -12,6 +12,7 @@ public class Geopard extends Robot {
         isHungry = true;
         isTired = false;
         antalVila = 0;
+        this.displaySymbol = 'G';
     }
 
     public void eatZebra(Zebra z) {
@@ -41,4 +42,6 @@ public class Geopard extends Robot {
     public void setAntalVila(int antalVila) {
         this.antalVila = antalVila;
     }
+
+
 }

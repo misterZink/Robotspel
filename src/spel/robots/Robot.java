@@ -1,15 +1,18 @@
 package spel.robots;
 
 // Klasses som geopard och zebra ärver ifrån
-public class Robot {
+abstract public class Robot {
     private int positionX;
     private int positionY;
     char displaySymbol;
     private int antalSteg;
 
-    // Börjar utan diagnonal riktning för att hålla det simpelt till en början.
-    // Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
-    enum riktning{
+    /**
+     * Börjar utan diagnonal riktning för att hålla det simpelt till en början.
+     * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
+     */
+
+    enum Riktning{
         UP,
         DOWN,
         RIGHT,
@@ -17,13 +20,21 @@ public class Robot {
     }
 
 
-    //Constructor
+    /**
+     * Constructor
+     */
     public Robot()
     {
-
+        this.positionX = 0;
+        this.positionY = 0;
+        this.displaySymbol = 'O';
+        this.antalSteg = 1;
     }
 
-    //Getter
+    /**
+     * Getters
+     * @return
+     */
     public int getPositionX()
     {
         return getPositionX();
@@ -37,18 +48,20 @@ public class Robot {
         return getAntalSteg();
     }
 
-    //Setter
+    /**
+     * Setters
+     */
     public void setPositionX()
     {
         this.setPositionX();
     }
     public void setPositionY()
     {
-
+        this.setPositionY();
     }
     public void setAntalSteg()
     {
-
+        this.setAntalSteg();
     }
 
     public void bestämAntalSteg()
@@ -56,13 +69,13 @@ public class Robot {
         int antalSteg = 1;
     }
 
-    //Vet inte varför R och L inte funkar?
+    /**
+     * Riktning med enums
+     */
+    Riktning r = Riktning.DOWN;
+
     public void move()
     {
-        riktning U = riktning.UP;
-        riktning D = riktning.DOWN;
-        riktning.R = riktning.RIGHT;
-        riktning.L = riktning.LEFT;
-
+        r = Riktning.UP;
     }
 }
