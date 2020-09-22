@@ -12,7 +12,6 @@ public class Geopard extends Robot {
         isHungry = true;
         isTired = false;
         antalVila = 0;
-        this.displaySymbol = 'G';
     }
 
     public void eatZebra(Zebra z) {
