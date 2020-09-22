@@ -11,8 +11,8 @@ public class Geopard extends Robot {
         isHungry = true;
         isTired = false;
         antalVila = 0;
-
     }
+
     public void eatZebra(Zebra z) {
         z.setDead(true);
     }

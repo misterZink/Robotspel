@@ -1,20 +1,22 @@
 package spel.robots;
 
 public class Zebra extends Robot {
-    private Boolean isDead;
+    private boolean isDead;
 
-
-    //deafult konstruktor, Zebran när man skapar objektet
+    //Default konstruktor, Zebran lever när man skapar objektet
     public Zebra() {
-        isDead=false;
+        isDead = false;
     }
-    // getter returnera isdead till den som anropar metoden.
+
+    // Getter, returnerar boolean isDead till den som anropar metoden
     public boolean isDead() {
         return isDead;
     }
-    //setters sätter värdet på is dead
+
+    //Setter, sätter värdet på isDead
     public void setDead(boolean dead) {
-        isDead=dead;
+        isDead = dead;
+
     }
 }
 
