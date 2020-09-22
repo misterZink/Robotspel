@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Robotspel {
     int zebraAmount = 0, geopardAmount = 0;
 
-    public Robotspel() 
+    public Robotspel() {
         while (!countRobots()) {
             askAmountOfRobots();
         }
@@ -19,7 +19,7 @@ public class Robotspel {
     }
 
     /**
-     * Räknar antal robotar, returnerar false om antalat är mindre än noll eller geoparder är fler än zebror.
+     * Räknar antal robotar, returnerar false om antalet är mindre än noll eller geoparder är fler än zebror.
      * @return
      */
     private boolean countRobots() {
@@ -48,8 +48,8 @@ public class Robotspel {
         System.out.println(questionZebras);
         this.zebraAmount = scanner.nextInt();
 
-        final String questionGeoaprds = "How many geopards?";
-        System.out.println(questionGeoaprds);
+        final String questionGeopards = "How many geopards?";
+        System.out.println(questionGeopards);
         this.geopardAmount = scanner.nextInt();
     }
 
