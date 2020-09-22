@@ -9,7 +9,7 @@ public class Zebra extends Robot {
      */
     public Zebra() {
         isDead = false;
-        this.displaySymbol = 'Z';
+        displaySymbol = 'Z';
     }
 
     /**
