@@ -12,6 +12,8 @@ public class Robotspel {
             askAmountOfRobots();
         }
 
+        askForPlayfieldSize();
+
         boolean exit = false;
         while (!exit) {
             printPlayfield();
@@ -68,6 +70,7 @@ public class Robotspel {
         final int height = scanner.nextInt();
 
         final Playfield playfield = new Playfield(width, height);
+        playfield.spawnRobots(geopardAmount, zebraAmount);
     }
 
     private void printPlayfield() {
