@@ -4,7 +4,7 @@ package spel.robots;
 abstract public class Robot {
     private int positionX;
     private int positionY;
-    char displaySymbol;
+    private char displaySymbol;
     private int antalSteg;
 
     /**
@@ -47,6 +47,10 @@ abstract public class Robot {
     {
         return getAntalSteg();
     }
+    public char getDisplaySymbol()
+    {
+        return displaySymbol;
+    }
 
     /**
      * Setters
@@ -62,6 +66,10 @@ abstract public class Robot {
     public void setAntalSteg(int antalSteg)
     {
         this.antalSteg = 1;
+    }
+    public void setDisplaySymbol()
+    {
+        this.setDisplaySymbol();
     }
 
     /**
