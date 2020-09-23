@@ -4,7 +4,7 @@ package spel.robots;
 abstract public class Robot {
     private int positionX;
     private int positionY;
-    char displaySymbol;
+    protected char displaySymbol;
     private int antalSteg;
 
     /**
@@ -47,6 +47,10 @@ abstract public class Robot {
     {
         return getAntalSteg();
     }
+    public char getDisplaySymbol()
+    {
+        return displaySymbol;
+    }
 
     /**
      * Setters
@@ -63,6 +67,7 @@ abstract public class Robot {
     {
         this.antalSteg = 1;
     }
+
 
     /**
      * Riktning med enums
