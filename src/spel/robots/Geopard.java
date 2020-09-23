@@ -6,31 +6,35 @@ public class Geopard extends Robot {
     private boolean isTired;
 
     private int antalVila;
+    private final int antalVilaFull;
 
     public Geopard() {
         super.displaySymbol = 'G';
         isHungry = true;
         isTired = false;
         antalVila = 0;
+        antalVilaFull = 2;
     }
 
     public void eatZebra(Zebra z) {
-
         z.setDead(true);
+        setHungry(false);
     }
 
     public boolean isHungry() {
-
         return isHungry;
     }
 
     public void setHungry(boolean hungry) {
-
+        if (hungry) {
+            antalVila = 0;
+        } else {
+            antalVila = antalVilaFull;
+        }
         isHungry = hungry;
     }
 
     public boolean isTired() {
-
         return isTired;
     }
 
@@ -44,14 +48,6 @@ public class Geopard extends Robot {
     }
 
     public int getAntalVila() {
-
         return antalVila;
     }
-
-    public void setAntalVila(int antalVila) {
-
-        this.antalVila = antalVila;
-    }
-
-
 }
