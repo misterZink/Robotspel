@@ -51,22 +51,17 @@ abstract public class Robot {
     /**
      * Setters
      */
-    public void setPositionX()
+    public void setPositionX(int positionX)
     {
-        this.setPositionX();
+        this.positionX = positionX;
     }
-    public void setPositionY()
+    public void setPositionY(int positionY)
     {
-        this.setPositionY();
+        this.positionY = positionY;
     }
-    public void setAntalSteg()
+    public void setAntalSteg(int antalSteg)
     {
-        this.setAntalSteg();
-    }
-
-    public void bestämAntalSteg()
-    {
-        int antalSteg = 1;
+        this.antalSteg = 1;
     }
 
     /**
