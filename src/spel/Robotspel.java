@@ -1,11 +1,14 @@
 package spel;
 
 import spel.playfield.Playfield;
+import spel.robots.Robot;
 
 import java.util.Scanner;
 
 public class Robotspel {
     int zebraAmount = 0, geopardAmount = 0;
+
+    private Playfield playfield;
 
     public Robotspel() {
         while (!countRobots()) {
@@ -17,7 +20,13 @@ public class Robotspel {
         boolean exit = false;
         while (!exit) {
             printPlayfield();
+            waitForInput();
         }
+    }
+
+    private void waitForInput() {
+        Scanner scanner = new Scanner(System.in);
+        scanner.next();
     }
 
     /**
@@ -69,12 +78,19 @@ public class Robotspel {
         System.out.println(questionPlayfieldHeight);
         final int height = scanner.nextInt();
 
-        final Playfield playfield = new Playfield(width, height);
-        playfield.spawnRobots(geopardAmount, zebraAmount);
+        playfield = new Playfield(width, height);
+        playfield.spawnGeopards(geopardAmount);
+        playfield.spawnZebras(zebraAmount);
     }
 
     private void printPlayfield() {
-        //printa playerifeld här från Playfield-klassen...
-
+        for (Robot[] x : playfield.getRobots())
+        {
+            for (Robot y : x)
+            {
+                System.out.print(y + " ");
+            }
+            System.out.println();
+        }
     }
 }
