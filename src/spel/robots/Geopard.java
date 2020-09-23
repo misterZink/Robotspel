@@ -37,8 +37,7 @@ public class Geopard extends Robot {
     public void setTired(boolean tired) {
         if (tired) {
             setAntalSteg(1);
-        }
-        else {
+        } else {
             setAntalSteg(6);
         }
         isTired = tired;

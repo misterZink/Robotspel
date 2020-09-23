@@ -3,10 +3,13 @@ package spel;
 import spel.playfield.Playfield;
 import spel.robots.Robot;
 
+import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Robotspel {
     int zebraAmount = 0, geopardAmount = 0;
+    int frames = 1;
 
     private Playfield playfield;
 
@@ -21,16 +24,24 @@ public class Robotspel {
         while (!exit) {
             printPlayfield();
             waitForInput();
+            frames++;
         }
     }
 
+    /**
+     * Wait for any input into console.
+     */
     private void waitForInput() {
-        Scanner scanner = new Scanner(System.in);
-        scanner.next();
+        try {
+            System.in.read();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Räknar antal robotar, returnerar false om antalet är mindre än noll eller geoparder är fler än zebror.
+     *
      * @return
      */
     private boolean countRobots() {
@@ -84,11 +95,16 @@ public class Robotspel {
     }
 
     private void printPlayfield() {
-        for (Robot[] x : playfield.getRobots())
-        {
-            for (Robot y : x)
-            {
-                System.out.print(y + " ");
+        final String playfieldAndFrmes = "-PLAYFIELD- Frames: " + frames;
+        System.out.println(playfieldAndFrmes);
+
+        for (Robot[] x : playfield.getRobots()) {
+            for (Robot y : x) {
+                if (y != null) {
+                    System.out.print(y.getDisplaySymbol() + " ");
+                } else {
+                    System.out.print("# ");
+                }
             }
             System.out.println();
         }
