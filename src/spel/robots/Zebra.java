@@ -8,8 +8,8 @@ public class Zebra extends Robot {
      * Default konstruktor, Zebran lever när man skapar objektet
      */
     public Zebra() {
+        super.displaySymbol = 'Z';
         isDead = false;
-        displaySymbol = 'Z';
     }
 
     /**
