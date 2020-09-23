@@ -15,18 +15,22 @@ public class Geopard extends Robot {
     }
 
     public void eatZebra(Zebra z) {
+
         z.setDead(true);
     }
 
     public boolean isHungry() {
+
         return isHungry;
     }
 
     public void setHungry(boolean hungry) {
+
         isHungry = hungry;
     }
 
     public boolean isTired() {
+
         return isTired;
     }
 
@@ -40,10 +44,12 @@ public class Geopard extends Robot {
     }
 
     public int getAntalVila() {
+
         return antalVila;
     }
 
     public void setAntalVila(int antalVila) {
+
         this.antalVila = antalVila;
     }
 
