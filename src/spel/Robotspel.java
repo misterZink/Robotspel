@@ -3,8 +3,6 @@ package spel;
 import spel.playfield.Playfield;
 import spel.robots.Robot;
 
-import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Robotspel {
@@ -107,6 +105,67 @@ public class Robotspel {
                 }
             }
             System.out.println();
+        }
+
+        getNextRobotInDirection();
+    }
+
+    public void getNextRobotInDirection() { //skicka in direciton enum
+        for (int y = 0; y < playfield.getRobots().length; y++) {
+            for (int x = 0; x < playfield.getRobots()[y].length; x++) {
+
+                final Robot otherRobot;
+                final Robot currentRobot = playfield.getRobots()[y][x];
+
+                int direction = 3; // 0 up, 1, down, 2, left, 3 right
+
+                // check for neighbour
+                if (currentRobot != null) {
+
+                    switch (direction) {
+                        case 0:
+                            if (y != 0) {
+                                otherRobot = playfield.getRobots()[y - 1][x];
+
+                                if (otherRobot != null) {
+                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + x + " y: " + (y - 1) + " norr om "
+                                            + currentRobot.getClass().getSimpleName());
+                                }
+                            }
+                            break;
+                        case 1:
+                            if (y != playfield.getRobots().length - 1) {
+                                otherRobot = playfield.getRobots()[y + 1][x];
+
+                                if (otherRobot != null) {
+                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + x + " y: " + (y + 1) + " söder om "
+                                            + currentRobot.getClass().getSimpleName());
+                                }
+                            }
+                            break;
+                        case 2:
+                            if (x != 0) {
+                                otherRobot = playfield.getRobots()[y][x - 1];
+
+                                if (otherRobot != null) {
+                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + (x - 1) + " y: " + y + " väst om "
+                                            + currentRobot.getClass().getSimpleName());
+                                }
+                            }
+                            break;
+                        case 3:
+                            if (x != playfield.getRobots()[y].length - 1) {
+                                otherRobot = playfield.getRobots()[y][x + 1];
+
+                                if (otherRobot != null) {
+                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + (x + 1) + " y: " + y + " öst om "
+                                            + currentRobot.getClass().getSimpleName());
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
         }
     }
 }
