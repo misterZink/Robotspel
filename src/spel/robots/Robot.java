@@ -1,6 +1,7 @@
 package spel.robots;
 
 import spel.Robotspel;
+import spel.robots.directions.Direction;
 
 import java.util.Random;
 
@@ -10,20 +11,13 @@ abstract public class Robot {
     private int positionY;
     protected char displaySymbol;
     private int antalSteg;
-    Direction r;
+    private Direction direction;
 
     /**
      * Börjar utan diagnonal riktning för att hålla det simpelt till en början.
      * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
      */
 
-    enum Direction{
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT;
-
-    }
 
     /**
      * Constructor
@@ -61,7 +55,7 @@ abstract public class Robot {
 
     public Direction getDirection()
     {
-        return this.r;
+        return this.direction;
     }
 
     /**
@@ -87,10 +81,10 @@ abstract public class Robot {
         final int randNum = rand.nextInt(3);
 
         switch (randNum) {
-            case 0 -> r = Direction.DOWN;
-            case 1 -> r = Direction.UP;
-            case 2 -> r = Direction.LEFT;
-            case 3 -> r = Direction.RIGHT;
+            case 0 -> direction = Direction.DOWN;
+            case 1 -> direction = Direction.UP;
+            case 2 -> direction = Direction.LEFT;
+            case 3 -> direction = Direction.RIGHT;
         }
     }
     public void move()
