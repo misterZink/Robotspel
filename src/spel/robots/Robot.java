@@ -10,6 +10,7 @@ abstract public class Robot {
     private int positionY;
     protected char displaySymbol;
     private int antalSteg;
+    Direction r;
 
     /**
      * Börjar utan diagnonal riktning för att hålla det simpelt till en början.
@@ -22,9 +23,7 @@ abstract public class Robot {
         RIGHT,
         LEFT;
 
-}
-
-
+    }
 
     /**
      * Constructor
@@ -35,6 +34,7 @@ abstract public class Robot {
         this.positionY = 0;
         this.displaySymbol = 'O';
         this.antalSteg = 1;
+        decideDirection();
     }
 
     /**
@@ -81,11 +81,6 @@ abstract public class Robot {
     }
 
 
-    /**
-     * Riktning med enums
-     */
-    Direction r = Direction.DOWN;
-
     public void decideDirection()
     {
         Random rand = new Random();
@@ -100,7 +95,6 @@ abstract public class Robot {
     }
     public void move()
     {
-
 
     }
 }
