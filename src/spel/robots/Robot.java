@@ -68,8 +68,6 @@ abstract public class Robot {
         this.antalSteg = 1;
     }
 
-    Riktning r = Riktning.DOWN;
-
     public void decideDirection()
     {
         Random rand = new Random();
