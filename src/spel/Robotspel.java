@@ -2,6 +2,7 @@ package spel;
 
 import spel.playfield.Playfield;
 import spel.robots.Robot;
+import spel.robots.directions.Direction;
 
 import java.util.Scanner;
 
@@ -19,10 +20,24 @@ public class Robotspel {
         askForPlayfieldSize();
 
         boolean exit = false;
+        //boolean fistRun = true;
         while (!exit) {
+
+            //if (!fistRun) {
+                for (Robot[] robotX : playfield.getRobots()) {
+                    for (Robot robot : robotX) {
+                        if (robot != null) {
+                            moveRobotWithDirection(robot);
+                        }
+                    }
+                }
+            //}
+
             printPlayfield();
             waitForInput();
             frames++;
+
+            //fistRun = false;
         }
     }
 
@@ -166,6 +181,37 @@ public class Robotspel {
                     }
                 }
             }
+        }
+    }
+
+    private void moveRobotWithDirection(final Robot robot) {
+
+            switch (robot.getDirection()) {
+                case UP:
+                    for (int y = 0; y < playfield.getRobots().length; y++) {
+                        for (int x = 0; x < playfield.getRobots()[y].length; x++) {
+                            if (robot == playfield.getRobots()[y][x]) {
+                                if (y != 0) {
+                                    if (playfield.getRobots()[y - 1][x] == null) {
+                                        playfield.getRobots()[y - 1][x] = robot;
+                                        playfield.getRobots()[y][x] = null;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+                case DOWN:
+
+                    break;
+                case LEFT:
+
+                    break;
+                case RIGHT:
+
+                    break;
+
         }
     }
 }

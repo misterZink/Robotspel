@@ -12,13 +12,7 @@ abstract public class Robot {
     protected char displaySymbol;
     private int antalSteg;
     private Direction direction;
-
-    /**
-     * Börjar utan diagnonal riktning för att hålla det simpelt till en början.
-     * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
-     */
-
-
+  
     /**
      * Constructor
      */
@@ -74,6 +68,7 @@ abstract public class Robot {
         this.antalSteg = 1;
     }
 
+    Riktning r = Riktning.DOWN;
 
     public void decideDirection()
     {
