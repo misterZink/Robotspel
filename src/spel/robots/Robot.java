@@ -1,5 +1,13 @@
 package spel.robots;
 
+<<<<<<< Updated upstream
+=======
+import spel.Robotspel;
+import spel.robots.directions.Direction;
+
+import java.util.Random;
+
+>>>>>>> Stashed changes
 // Klasses som geopard och zebra ärver ifrån
 abstract public class Robot {
     private int positionX;
@@ -12,6 +20,7 @@ abstract public class Robot {
      * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
      */
 
+<<<<<<< Updated upstream
     enum Riktning{
         UP,
         DOWN,
@@ -20,6 +29,8 @@ abstract public class Robot {
     }
 
 
+=======
+>>>>>>> Stashed changes
     /**
      * Constructor
      */
@@ -72,7 +83,16 @@ abstract public class Robot {
     /**
      * Riktning med enums
      */
+<<<<<<< Updated upstream
     Riktning r = Riktning.DOWN;
+=======
+    Direction r = Direction.UP;
+
+    public void decideDirection()
+    {
+        Random rand = new Random();
+        final int randNum = rand.nextInt(3);
+>>>>>>> Stashed changes
 
     public void move()
     {
