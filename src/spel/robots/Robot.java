@@ -1,5 +1,9 @@
 package spel.robots;
 
+import spel.Robotspel;
+
+import java.util.Random;
+
 // Klasses som geopard och zebra ärver ifrån
 abstract public class Robot {
     private int positionX;
@@ -12,12 +16,14 @@ abstract public class Robot {
      * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
      */
 
-    enum Riktning{
+    enum Direction{
         UP,
         DOWN,
         RIGHT,
         LEFT;
-    }
+
+}
+
 
 
     /**
@@ -52,6 +58,12 @@ abstract public class Robot {
         return displaySymbol;
     }
 
+
+    public Direction getDirection()
+    {
+        return this.r;
+    }
+
     /**
      * Setters
      */
@@ -72,10 +84,23 @@ abstract public class Robot {
     /**
      * Riktning med enums
      */
-    Riktning r = Riktning.DOWN;
+    Direction r = Direction.DOWN;
 
+    public void decideDirection()
+    {
+        Random rand = new Random();
+        final int randNum = rand.nextInt(3);
+
+        switch (randNum) {
+            case 0 -> r = Direction.DOWN;
+            case 1 -> r = Direction.UP;
+            case 2 -> r = Direction.LEFT;
+            case 3 -> r = Direction.RIGHT;
+        }
+    }
     public void move()
     {
-        r = Riktning.UP;
+
+
     }
 }
