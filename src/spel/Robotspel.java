@@ -23,6 +23,7 @@ public class Robotspel {
         //boolean fistRun = true;
         while (!exit) {
 
+            //hurr
             //if (!fistRun) {
                 for (Robot[] robotX : playfield.getRobots()) {
                     for (Robot robot : robotX) {
