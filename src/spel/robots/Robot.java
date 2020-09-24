@@ -1,36 +1,18 @@
 package spel.robots;
 
-<<<<<<< Updated upstream
-=======
 import spel.Robotspel;
 import spel.robots.directions.Direction;
 
 import java.util.Random;
 
->>>>>>> Stashed changes
 // Klasses som geopard och zebra ärver ifrån
 abstract public class Robot {
     private int positionX;
     private int positionY;
     protected char displaySymbol;
     private int antalSteg;
-
-    /**
-     * Börjar utan diagnonal riktning för att hålla det simpelt till en början.
-     * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
-     */
-
-<<<<<<< Updated upstream
-    enum Riktning{
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT;
-    }
-
-
-=======
->>>>>>> Stashed changes
+    private Direction direction;
+  
     /**
      * Constructor
      */
@@ -40,6 +22,7 @@ abstract public class Robot {
         this.positionY = 0;
         this.displaySymbol = 'O';
         this.antalSteg = 1;
+        decideDirection();
     }
 
     /**
@@ -63,6 +46,12 @@ abstract public class Robot {
         return displaySymbol;
     }
 
+
+    public Direction getDirection()
+    {
+        return this.direction;
+    }
+
     /**
      * Setters
      */
@@ -79,23 +68,22 @@ abstract public class Robot {
         this.antalSteg = 1;
     }
 
-
-    /**
-     * Riktning med enums
-     */
-<<<<<<< Updated upstream
     Riktning r = Riktning.DOWN;
-=======
-    Direction r = Direction.UP;
 
     public void decideDirection()
     {
         Random rand = new Random();
         final int randNum = rand.nextInt(3);
->>>>>>> Stashed changes
 
+        switch (randNum) {
+            case 0 -> direction = Direction.DOWN;
+            case 1 -> direction = Direction.UP;
+            case 2 -> direction = Direction.LEFT;
+            case 3 -> direction = Direction.RIGHT;
+        }
+    }
     public void move()
     {
-        r = Riktning.UP;
+
     }
 }
