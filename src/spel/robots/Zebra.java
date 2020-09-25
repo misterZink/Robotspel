@@ -1,6 +1,6 @@
 package spel.robots;
 
-public class Zebra extends Robot {
+public class Zebra extends Robot implements Moveable{
     private boolean isDead;
 
     /**
@@ -25,7 +25,11 @@ public class Zebra extends Robot {
      */
     public void setDead(boolean dead) {
         isDead = dead;
+    }
 
+
+    public boolean move() {
+        return true;
     }
 }
 
