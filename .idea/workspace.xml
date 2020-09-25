@@ -20,9 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83985dc1-56c1-40c6-a976-cfe911f70d04" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/spel/robots/directions/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spel/robots/Moveable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Robotspel/spel/Robotspel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Robotspel/spel/Robotspel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Robotspel/spel/robots/Geopard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Robotspel/spel/robots/Geopard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Robotspel/spel/robots/Robot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Robotspel/spel/robots/Robot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Robotspel/spel/robots/Zebra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Robotspel/spel/robots/Zebra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spel/robots/Geopard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spel/robots/Geopard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spel/robots/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spel/robots/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spel/robots/Zebra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spel/robots/Zebra.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +41,7 @@
       <list>
         <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -89,6 +97,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="0" key="#Project_Structure" timestamp="1600687800924">
@@ -99,26 +108,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="63" width="1089" height="761" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1600760028784" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1600783212204">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1601019347475">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1600760037163" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600783212204" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1600783212204">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601019347475" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1601019347475">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1600760037163" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600783212204" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1600783212204">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601019347475" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1601019347475">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1600760037162" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600783212204" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1600783212204">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601019347475" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1601019347475">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1600760037163" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600783212204" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601019347475" />
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600688067690">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
