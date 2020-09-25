@@ -4,7 +4,7 @@ package spel.robots;
 abstract public class Robot {
     private int positionX;
     private int positionY;
-    char displaySymbol;
+    protected char displaySymbol;
     private int antalSteg;
 
     /**
@@ -47,27 +47,27 @@ abstract public class Robot {
     {
         return getAntalSteg();
     }
+    public char getDisplaySymbol()
+    {
+        return displaySymbol;
+    }
 
     /**
      * Setters
      */
-    public void setPositionX()
+    public void setPositionX(int positionX)
     {
-        this.setPositionX();
+        this.positionX = positionX;
     }
-    public void setPositionY()
+    public void setPositionY(int positionY)
     {
-        this.setPositionY();
+        this.positionY = positionY;
     }
-    public void setAntalSteg()
+    public void setAntalSteg(int antalSteg)
     {
-        this.setAntalSteg();
+        this.antalSteg = 1;
     }
 
-    public void bestämAntalSteg()
-    {
-        int antalSteg = 1;
-    }
 
     /**
      * Riktning med enums
