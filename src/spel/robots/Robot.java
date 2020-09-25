@@ -1,27 +1,20 @@
 package spel.robots;
 
+import spel.Robotspel;
+import spel.robots.directions.Direction;
+
+import java.util.Random;
+
 // Klasses som geopard och zebra ärver ifrån
 abstract public class Robot {
     private int positionX;
     private int positionY;
     protected char displaySymbol;
     private int antalSteg;
-
+    private Direction direction;
+  
     /**
-     * Börjar utan diagnonal riktning för att hålla det simpelt till en början.
-     * Den behöver röra sig i i vektorn som ligger i spelplanen tror jag?
-     */
-
-    enum Riktning{
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT;
-    }
-
-
-    /**
-     * Constructor
+     * Constructor e
      */
     public Robot()
     {
@@ -29,6 +22,7 @@ abstract public class Robot {
         this.positionY = 0;
         this.displaySymbol = 'O';
         this.antalSteg = 1;
+        decideDirection();
     }
 
     /**
@@ -52,6 +46,12 @@ abstract public class Robot {
         return displaySymbol;
     }
 
+
+    public Direction getDirection()
+    {
+        return this.direction;
+    }
+
     /**
      * Setters
      */
@@ -68,14 +68,20 @@ abstract public class Robot {
         this.antalSteg = 1;
     }
 
+    public void decideDirection()
+    {
+        Random rand = new Random();
+        final int randNum = rand.nextInt(3);
 
-    /**
-     * Riktning med enums
-     */
-    Riktning r = Riktning.DOWN;
-
+        switch (randNum) {
+            case 0 -> direction = Direction.DOWN;
+            case 1 -> direction = Direction.UP;
+            case 2 -> direction = Direction.LEFT;
+            case 3 -> direction = Direction.RIGHT;
+        }
+    }
     public void move()
     {
-        r = Riktning.UP;
+
     }
 }
