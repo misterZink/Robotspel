@@ -26,6 +26,15 @@ abstract public class Robot{
     }
 
     /**
+     * Denna metoden ska köras varje runda/update för spelet.
+     * Här ska data uppdateras beroende på conditions.
+     * T.ex: Om trött antalSteg = 0. Else antalSteg = 1;
+     */
+    public void update() {
+        antalSteg = 1;
+    }
+
+    /**
      * Getters
      * @return
      */
@@ -39,7 +48,7 @@ abstract public class Robot{
     }
     public int getAntalSteg()
     {
-        return getAntalSteg();
+        return this.antalSteg;
     }
     public char getDisplaySymbol()
     {

@@ -49,7 +49,7 @@ public class Geopard extends Robot implements Moveable{
         } else {
             setAntalSteg(6);
         }
-        isTired = tired;
+        this.isTired = tired;
     }
 
     public int getAntalVila() {
