@@ -24,26 +24,26 @@ public class Playfield {
     }
 
     public void spawnGeopards(final int amountOfGeopards) {
-        int geopardsSpawned = 0;
-        boolean allGeopardsSpawned = false;
+        int cheetahsSpawned = 0;
+        boolean allCheetahsSpawned = false;
         Random random = new Random();
 
-        while (!allGeopardsSpawned) {
+        while (!allCheetahsSpawned) {
             for (int j = 0; j < robots.length; j++) {
                 for (int k = 0; k < robots[j].length; k++) {
 
-                    if (geopardsSpawned < amountOfGeopards) {
+                    if (cheetahsSpawned < amountOfGeopards) {
                         if (robots[j][k] == null) {
                             final int toSpawn = random.nextInt(spawnIntLimit);
 
                             if (toSpawn < spawnChance) {
                                 robots[j][k] = new Geopard();
-                                geopardsSpawned++;
-                                System.out.println("Geopard " + geopardsSpawned + "/" + amountOfGeopards + " spawned @" + " [" + j + "][" + k + "]");
+                                cheetahsSpawned++;
+                                System.out.println("Geopard " + cheetahsSpawned + "/" + amountOfGeopards + " spawned @" + " [" + j + "][" + k + "]");
                             }
                         }
                     } else {
-                        allGeopardsSpawned = true;
+                        allCheetahsSpawned = true;
                     }
                 }
             }

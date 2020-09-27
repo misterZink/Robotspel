@@ -7,8 +7,8 @@ import spel.robots.directions.Direction;
 import java.util.Scanner;
 
 public class Robotspel {
-    int zebraAmount = 0, geopardAmount = 0;
-    int frames = 1;
+    private int zebraAmount = 0, geopardAmount = 0;
+    private int frames = 1;
 
     private Playfield playfield;
 
@@ -20,25 +20,22 @@ public class Robotspel {
         askForPlayfieldSize();
 
         boolean exit = false;
-        //boolean fistRun = true;
+        boolean isFirstRun = true;
         while (!exit) {
-
-            //hurr
-            //if (!fistRun) {
-                for (Robot[] robotX : playfield.getRobots()) {
-                    for (Robot robot : robotX) {
-                        if (robot != null) {
-                            moveRobotWithDirection(robot);
-                        }
-                    }
-                }
-            //}
+            if (!isFirstRun) {
+                updateAllRobotsStats();
+                getNextRobotInDirection();
+                // Kolla om rotation på robot behövs här.
+                moveRobotsInDirection();
+            }
 
             printPlayfield();
             waitForInput();
-            frames++;
+            if (isFirstRun) {
+                isFirstRun = false;
+            }
 
-            //fistRun = false;
+            frames++;
         }
     }
 
@@ -108,6 +105,10 @@ public class Robotspel {
         playfield.spawnZebras(zebraAmount);
     }
 
+    /**
+     * Då spelplanen består av en 2D array printas spelplanen inte som på vanligt vis.
+     * Varje cell åt höger är egentligen en cell neråt.
+     */
     private void printPlayfield() {
         final String playfieldAndFrmes = "-PLAYFIELD- Frames: " + frames;
         System.out.println(playfieldAndFrmes);
@@ -122,26 +123,24 @@ public class Robotspel {
             }
             System.out.println();
         }
-
-        getNextRobotInDirection();
     }
 
-    public void getNextRobotInDirection() { //skicka in direciton enum
-        for (int y = 0; y < playfield.getRobots().length; y++) {
-            for (int x = 0; x < playfield.getRobots()[y].length; x++) {
+    /**
+     * Ska användas för att få vilken robot som är framför denna robot.
+     */
+    public void getNextRobotInDirection() {
+        for (int x = 0; x < playfield.getRobots().length; x++) {
+            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
 
                 final Robot otherRobot;
-                final Robot currentRobot = playfield.getRobots()[y][x];
-
-                int direction = 3; // 0 up, 1, down, 2, left, 3 right
+                final Robot currentRobot = playfield.getRobots()[x][y];
 
                 // check for neighbour
                 if (currentRobot != null) {
-
-                    switch (direction) {
-                        case 0:
-                            if (y != 0) {
-                                otherRobot = playfield.getRobots()[y - 1][x];
+                    switch (currentRobot.getDirection()) {
+                        case DOWN:
+                            if (x != 0) {
+                                otherRobot = playfield.getRobots()[x - 1][y];
 
                                 if (otherRobot != null) {
                                     System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + x + " y: " + (y - 1) + " norr om "
@@ -149,9 +148,9 @@ public class Robotspel {
                                 }
                             }
                             break;
-                        case 1:
-                            if (y != playfield.getRobots().length - 1) {
-                                otherRobot = playfield.getRobots()[y + 1][x];
+                        case UP:
+                            if (x != playfield.getRobots().length - 1) {
+                                otherRobot = playfield.getRobots()[x + 1][y];
 
                                 if (otherRobot != null) {
                                     System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + x + " y: " + (y + 1) + " söder om "
@@ -159,9 +158,9 @@ public class Robotspel {
                                 }
                             }
                             break;
-                        case 2:
-                            if (x != 0) {
-                                otherRobot = playfield.getRobots()[y][x - 1];
+                        case LEFT:
+                            if (y != 0) {
+                                otherRobot = playfield.getRobots()[x][y - 1];
 
                                 if (otherRobot != null) {
                                     System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + (x - 1) + " y: " + y + " väst om "
@@ -169,9 +168,9 @@ public class Robotspel {
                                 }
                             }
                             break;
-                        case 3:
-                            if (x != playfield.getRobots()[y].length - 1) {
-                                otherRobot = playfield.getRobots()[y][x + 1];
+                        case RIGHT:
+                            if (y != playfield.getRobots()[x].length - 1) {
+                                otherRobot = playfield.getRobots()[x][y + 1];
 
                                 if (otherRobot != null) {
                                     System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + (x + 1) + " y: " + y + " öst om "
@@ -185,34 +184,72 @@ public class Robotspel {
         }
     }
 
-    private void moveRobotWithDirection(final Robot robot) {
+    private void updateAllRobotsStats() {
+        for (int x = 0; x < playfield.getRobots().length; x++) {
+            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+                if (playfield.getRobots()[x][y] != null) {
+                    playfield.getRobots()[x][y].update();
+                }
+            }
+        }
+    }
 
-            switch (robot.getDirection()) {
-                case UP:
-                    for (int y = 0; y < playfield.getRobots().length; y++) {
-                        for (int x = 0; x < playfield.getRobots()[y].length; x++) {
-                            if (robot == playfield.getRobots()[y][x]) {
-                                if (y != 0) {
-                                    if (playfield.getRobots()[y - 1][x] == null) {
-                                        playfield.getRobots()[y - 1][x] = robot;
-                                        playfield.getRobots()[y][x] = null;
+    /**
+     * Första array är x.
+     * Array inuti array är y.
+     * Om man tänker som ett koordinatsystem x/y så blir det lite omvänt:
+     * Upp: x-
+     * Ner: x+
+     * Vänster: y-
+     * Höger: y+
+     */
+    private void moveRobotsInDirection() {
+        for (int x = 0; x < playfield.getRobots().length; x++) {
+            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+
+                if (playfield.getRobots()[x][y] != null) {
+                    if (playfield.getRobots()[x][y].getAntalSteg() != 0) {
+                        final Robot currentRobot = playfield.getRobots()[x][y];
+
+                        switch (currentRobot.getDirection()) {
+                            case UP:
+                                if (x != 0) {
+                                    if (playfield.getRobots()[x - 1][y] == null) {
+                                        playfield.getRobots()[x - 1][y] = currentRobot;
+                                        playfield.getRobots()[x][y] = null;
                                     }
                                 }
-                            }
+                                break;
+                            case DOWN:
+                                if (x < playfield.getRobots().length - 1) {
+                                    if (playfield.getRobots()[x + 1][y] == null) {
+                                        playfield.getRobots()[x + 1][y] = currentRobot;
+                                        playfield.getRobots()[x][y] = null;
+                                    }
+                                }
+                                break;
+                            case LEFT:
+                                if (y != 0) {
+                                    if (playfield.getRobots()[x][y - 1] == null) {
+                                        playfield.getRobots()[x][y - 1] = currentRobot;
+                                        playfield.getRobots()[x][y] = null;
+                                    }
+                                }
+                                break;
+                            case RIGHT:
+                                if (y < playfield.getRobots()[x].length - 1) {
+                                    if (playfield.getRobots()[x][y + 1] == null) {
+                                        playfield.getRobots()[x][y + 1] = currentRobot;
+                                        playfield.getRobots()[x][y] = null;
+                                    }
+                                }
+                                break;
                         }
+
+                        currentRobot.setAntalSteg(currentRobot.getAntalSteg() - 1);
                     }
-
-                    break;
-                case DOWN:
-
-                    break;
-                case LEFT:
-
-                    break;
-                case RIGHT:
-
-                    break;
-
+                }
+            }
         }
     }
 }
