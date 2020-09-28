@@ -12,7 +12,13 @@ abstract public class Robot{
     protected char displaySymbol;
     private int antalSteg;
     private Direction direction;
-  
+
+    protected Robot robotTarget;
+
+    public void setRobotTarget(Robot robot) {
+        this.robotTarget = robot;
+    }
+
     /**
      * Constructor e
      */
