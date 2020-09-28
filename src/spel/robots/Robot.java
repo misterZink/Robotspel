@@ -38,6 +38,7 @@ abstract public class Robot{
      */
     public void update() {
         antalSteg = 1;
+        decideDirection();
     }
 
     /**
@@ -46,11 +47,11 @@ abstract public class Robot{
      */
     public int getPositionX()
     {
-        return getPositionX();
+        return this.positionX;
     }
     public int getPositionY()
     {
-        return getPositionY();
+        return this.positionY;
     }
     public int getAntalSteg()
     {
@@ -86,7 +87,7 @@ abstract public class Robot{
     public void decideDirection()
     {
         Random rand = new Random();
-        final int randNum = rand.nextInt(3);
+        final int randNum = rand.nextInt(4);
 
         switch (randNum) {
             case 0 -> direction = Direction.DOWN;

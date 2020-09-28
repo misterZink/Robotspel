@@ -3,6 +3,7 @@ package spel;
 import spel.playfield.Playfield;
 import spel.robots.Geopard;
 import spel.robots.Robot;
+import spel.robots.Zebra;
 import spel.robots.directions.Direction;
 
 import java.util.Scanner;
@@ -43,8 +44,15 @@ public class Robotspel {
         System.out.println("GAME QUIT");
     }
 
-    private void exitIfRobotcount() {
-
+    private void deleteRobot(int x, int y) {
+         //if (playfield.getRobots()[x][y] != null) {
+             if (playfield.getRobots()[x][y].getDisplaySymbol() == 'Z') {
+                 Zebra zebra = (Zebra)playfield.getRobots()[x][y];
+                 if (zebra.isDead()) {
+                     playfield.getRobots()[x][y] = null;
+                 }
+             }
+         //}
     }
 
     /**
@@ -149,47 +157,29 @@ public class Robotspel {
                         case DOWN:
                             if (x != 0) {
                                 otherRobot = playfield.getRobots()[x - 1][y];
-
-                                //if (otherRobot != null) {
-                                //    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + x + " y: " + (y - 1) + " norr om "
-                                //            + currentRobot.getClass().getSimpleName());
-                                //}
                             }
                             break;
                         case UP:
                             if (x != playfield.getRobots().length - 1) {
                                 otherRobot = playfield.getRobots()[x + 1][y];
-
-                                /* if (otherRobot != null) {
-                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + x + " y: " + (y + 1) + " söder om "
-                                            + currentRobot.getClass().getSimpleName());
-                                } */
                             }
                             break;
                         case LEFT:
                             if (y != 0) {
                                 otherRobot = playfield.getRobots()[x][y - 1];
-
-                                /* if (otherRobot != null) {
-                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + (x - 1) + " y: " + y + " väst om "
-                                            + currentRobot.getClass().getSimpleName());
-                                } */
                             }
                             break;
                         case RIGHT:
                             if (y != playfield.getRobots()[x].length - 1) {
                                 otherRobot = playfield.getRobots()[x][y + 1];
-
-                                /* if (otherRobot != null) {
-                                    System.out.println(otherRobot.getClass().getSimpleName() + " @x: " + (x + 1) + " y: " + y + " öst om "
-                                            + currentRobot.getClass().getSimpleName());
-                                } */
                             }
                             break;
                     }
 
-                    if (otherRobot.getDisplaySymbol() == 'Z') {
-                        currentRobot.setRobotTarget(otherRobot);
+                    if (otherRobot != null) {
+                        if (otherRobot.getDisplaySymbol() == 'Z') {
+                            currentRobot.setRobotTarget(otherRobot);
+                        }
                     }
 
                 }
@@ -202,9 +192,11 @@ public class Robotspel {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
                 if (playfield.getRobots()[x][y] != null) {
 
-                    //Geopard gep = (Geopard) playfield.getRobots()[x][y]; // ?!?!?!in på discord i
-
+                    playfield.getRobots()[x][y].setPositionX(x);
+                    playfield.getRobots()[x][y].setPositionY(y);
                     playfield.getRobots()[x][y].update();
+
+                    deleteRobot(x, y);
                 }
             }
         }

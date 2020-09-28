@@ -56,6 +56,17 @@ public class Geopard extends Robot implements Moveable{
         return antalVila;
     }
 
+    @Override
+    public void update() {
+        super.update();
+
+        if (robotTarget != null) {
+            eatZebra((Zebra) robotTarget);
+
+            System.out.println("Gepard x: " + this.getPositionX() + " y: " + this.getPositionY() + " åt Zebra x: " + robotTarget.getPositionX() + " y: " + robotTarget.getPositionY());
+            robotTarget = null;
+        }
+    }
 
     public boolean move() {
         if (!isHungry) {
