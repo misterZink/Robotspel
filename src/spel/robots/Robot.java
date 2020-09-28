@@ -32,6 +32,7 @@ abstract public class Robot{
      */
     public void update() {
         antalSteg = 1;
+        decideDirection();
     }
 
     /**
