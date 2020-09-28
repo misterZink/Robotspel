@@ -10,7 +10,7 @@ public class Robotspel {
     private int zebraAmount = 0, geopardAmount = 0; //Starta spelet med 0 zebra och 0 geopard
     private int frames = 1;                         // frame = förstas omgång
 
-    private Playfield playfield;
+    private Playfield playfield;                    //
 
     public Robotspel() {
         while (!countRobots()) {
