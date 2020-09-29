@@ -37,7 +37,6 @@ abstract public class Robot{
      * T.ex: Om trött antalSteg = 0. Else antalSteg = 1;
      */
     public void update() {
-        antalSteg = 1;
         decideDirection();
     }
 
