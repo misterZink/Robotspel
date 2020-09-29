@@ -1,6 +1,6 @@
 package spel.robots;
 
-public class Geopard extends Robot implements Moveable{
+public class Geopard extends Robot implements Moveable {
 
     private boolean isHungry;
     private boolean isTired;
@@ -13,12 +13,17 @@ public class Geopard extends Robot implements Moveable{
         isHungry = true;
         isTired = false;
         antalVila = 0;
-        antalVilaFull = 2;
+        antalVilaFull = 3;
     }
 
     public void eatZebra(Zebra z) {
-        z.setDead(true);
-        setHungry(false);
+        if (!z.isDead()) {
+            z.setDead(true);
+          
+            System.out.println("Gepard x: " + this.getPositionX() + " y: " + this.getPositionY() + " åt Zebra x: " + robotTarget.getPositionX() + " y: " + robotTarget.getPositionY());
+          
+            setHungry(false);
+        }
     }
 
     public boolean isHungry() {
@@ -60,14 +65,9 @@ public class Geopard extends Robot implements Moveable{
         if (robotTarget != null) {
             if (isHungry) {
                 eatZebra((Zebra) robotTarget);
+                robotTarget = null;
             }
-
-            System.out.println("Gepard x: " + this.getPositionX() + " y: " + this.getPositionY() + " åt Zebra x: " + robotTarget.getPositionX() + " y: " + robotTarget.getPositionY());
-            robotTarget = null;
-        }
-<<<<<<< Updated upstream
-=======
-
+        }        
 
         if (!isHungry) {
             if (antalVila > 0) {
@@ -78,7 +78,6 @@ public class Geopard extends Robot implements Moveable{
                 System.out.println("Geparden är nu hungrig");
             }
         }
->>>>>>> Stashed changes
     }
 
     public boolean move() {

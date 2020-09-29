@@ -54,6 +54,7 @@ public class Robotspel {
                 playfield.getRobots()[x][y] = null;
             }
         }
+
     }
 
     /**
