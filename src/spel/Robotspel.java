@@ -1,29 +1,16 @@
 package spel;
 
 import spel.playfield.Playfield;
-import spel.robots.Geopard;
 import spel.robots.Robot;
 import spel.robots.Zebra;
-import spel.robots.directions.Direction;
 
 import java.util.Scanner;
 
 public class Robotspel {
-    /**
-     * Starta spelet med 0 zebra och 0 geopard
-     */
-    private int zebraAmount = 0, geopardAmount = 0;
+    private int zebraAmount = 0, geopardAmount = 0; // Starta spelet med 0 zebra och 0 geopard
+    private int frames = 1; // frame = omgång
 
-    /**
-     * frame = förstas omgång
-     */
-    private int frames = 1;
-
-    /**
-     * skapa ett minne till playfield
-     */
-    private Playfield playfield;
-
+    private Playfield playfield; // skapa ett minne till playfield
 
     /**
      * I loppen när den inte finmns någon robot ska användaren mata in antal Zebra
@@ -33,30 +20,41 @@ public class Robotspel {
         while (!countRobots()) {
             askAmountOfRobots();
         }
-    }
+
         askForPlayfieldSize();
 
-        /** sant att spelet ska köras igång
-            försa rundan pågår
-         om det inte är den första runda så uppdateras Robotstatus,
-         Kontrollera vem som är bredvid roboten (granne) och
-         robot tar en random steg, antingen up,ner, vänster eller höger
-         *
-         */
+        /* sant att spelet ska köras igång
+        försa rundan pågår
+        om det inte är den första runda så uppdateras Robotstatus,
+        Kontrollera vem som är bredvid roboten (granne) och
+        robot tar en random steg, antingen up,ner, vänster eller höger */
 
         boolean exit = false;
         boolean isFirstRun = true;
+        while (!exit) {
             if (!isFirstRun) {
-                updateAllRobotsStats();
+                updateAllRobots();
                 getNextRobotInDirection();
+                // Kolla om rotation på robot behövs här.
                 moveRobotsInDirection();
                 deleteDeadRobots();
+
+/*
+                for (int x = 0; x < playfield.getRobots().length; x++) {
+                    for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+                        if (playfield.getRobots()[x][y] != null) {
+                            playfield.getRobots()[x][y].setPositionX(x);
+                            playfield.getRobots()[x][y].setPositionY(y);
+                        }
+                    }
+                }
+ */
             }
-        /** Skriver ut playfield på konsolen, inväntar input från
-         * användaren och då är det inte längre första runda.
-         * fram räknar antal omgångar
-         */
-        printPlayfield();
+
+            /* Skriver ut playfield på konsolen, inväntar input från
+             * användaren och då är det inte längre första runda.
+             * fram räknar antal omgångar */
+            printPlayfield();
             waitForInput();
 
             if (isFirstRun) {
@@ -67,13 +65,13 @@ public class Robotspel {
             frames++;
         }
 
-
         System.out.println("GAME QUIT");
     }
 
     private void deleteRobot(int x, int y) {
         if (playfield.getRobots()[x][y].getDisplaySymbol() == 'Z') {
             Zebra zebra = (Zebra) playfield.getRobots()[x][y];
+
             if (zebra.isDead()) {
                 zebraAmount--;
                 playfield.getRobots()[x][y] = null;
@@ -82,8 +80,8 @@ public class Robotspel {
 
     }
 
-
     /**
+     * Wait for any input into console.
      * Inväntar input från användaren (metod).
      */
     private void waitForInput() {
@@ -95,7 +93,8 @@ public class Robotspel {
     }
 
     /**
-     *Räknar antal robotar, returnerar false om antalet är mindre än noll eller geoparder är fler än zebror.
+     * Räknar antal robotar, returnerar false om antalet är mindre än noll eller geoparder är fler än zebror.
+     *
      * @return
      */
     private boolean countRobots() {
@@ -130,7 +129,7 @@ public class Robotspel {
     }
 
     /**
-     * Frågar efter storleken på spelplanen (metod).
+     * Frågar efter storleken på spelplanen.
      */
     private void askForPlayfieldSize() {
         final Scanner scanner = new Scanner(System.in);
@@ -169,7 +168,8 @@ public class Robotspel {
     }
 
     /**
-     * Metoden som kontrollera vem som står bredvid roboten (granne).
+     * Ska användas för att få vilken robot som är framför denna robot.
+     * Metoden som kontrollera vem som står bredvid roboten (granne)
      */
     public void getNextRobotInDirection() {
         for (int x = 0; x < playfield.getRobots().length; x++) {
@@ -214,18 +214,14 @@ public class Robotspel {
         }
     }
 
-    private void updateAllRobotsStats() {
+    private void updateAllRobots() {
         for (int x = 0; x < playfield.getRobots().length; x++) {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
                 if (playfield.getRobots()[x][y] != null) {
-                    playfield.getRobots()[x][y].setPositionX(x);
-                    playfield.getRobots()[x][y].setPositionY(y);
                     playfield.getRobots()[x][y].update();
                 }
             }
         }
-
-
     }
 
     private void deleteDeadRobots() {
@@ -289,6 +285,9 @@ public class Robotspel {
                                 }
                                 break;
                         }
+
+                        currentRobot.setPositionX(x);
+                        currentRobot.setPositionY(y);
 
                         currentRobot.setAntalSteg(currentRobot.getAntalSteg() - 1);
                     }

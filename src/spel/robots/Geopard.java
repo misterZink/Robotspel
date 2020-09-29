@@ -2,10 +2,6 @@ package spel.robots;
 
 public class Geopard extends Robot implements Moveable {
 
-    /**
-     * Default konstruktor för geopard
-     */
-
     private boolean isHungry;
     private boolean isTired;
 
@@ -13,9 +9,8 @@ public class Geopard extends Robot implements Moveable {
     private final int antalVilaFull;
 
     /**
-     * Overload konstruktor för geopard
+     * Default konstruktor för geopard
      */
-
     public Geopard() {
         super.displaySymbol = 'G';
         isHungry = true;
@@ -32,14 +27,14 @@ public class Geopard extends Robot implements Moveable {
         if (!z.isDead()) {
             z.setDead(true);
           
-            System.out.println("Gepard x: " + this.getPositionX() + " y: " + this.getPositionY() + " åt Zebra x: " + robotTarget.getPositionX() + " y: " + robotTarget.getPositionY());
+            System.out.println("Gepard x: " + this.getPositionY() + " y: " + this.getPositionX() + " åt Zebra x: " + robotTarget.getPositionY() + " y: " + robotTarget.getPositionX());
           
             setHungry(false);
         }
     }
 
     /**
-     * Geoparden är hungrig när den börjar.
+     * Returnerar om geoparden är hungrig.
      * @return
      */
     public boolean isHungry() {
@@ -62,7 +57,7 @@ public class Geopard extends Robot implements Moveable {
     }
 
     /**
-     *  Geoparden är trött.
+     * Returnerar Geoparden är trött eller ej.
      * @return
      */
     public boolean isTired() {
@@ -83,7 +78,7 @@ public class Geopard extends Robot implements Moveable {
     }
 
     /**
-     *  Antal vila returneras
+     * Antal vila returneras
      * @return
      */
     public int getAntalVila() {
@@ -113,8 +108,9 @@ public class Geopard extends Robot implements Moveable {
     }
 
     /**
-     * Bekräfta att geoparden är hungrig om den är hungrig(returneras).
-      * @return
+     * Move returneras true om geparden inte är hunrig
+     * Bekräfta att geoparden är hungrig om den är hungrig(returneras)
+     * @return
      */
     public boolean move() {
         if (!isHungry) {
