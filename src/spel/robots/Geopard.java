@@ -17,11 +17,8 @@ public class Geopard extends Robot implements Moveable{
     }
 
     public void eatZebra(Zebra z) {
-        if (isHungry) {
-            z.setDead(true);
-            setHungry(false);
-        }
-
+        z.setDead(true);
+        setHungry(false);
     }
 
     public boolean isHungry() {
@@ -61,11 +58,27 @@ public class Geopard extends Robot implements Moveable{
         super.update();
 
         if (robotTarget != null) {
-            eatZebra((Zebra) robotTarget);
+            if (isHungry) {
+                eatZebra((Zebra) robotTarget);
+            }
 
             System.out.println("Gepard x: " + this.getPositionX() + " y: " + this.getPositionY() + " åt Zebra x: " + robotTarget.getPositionX() + " y: " + robotTarget.getPositionY());
             robotTarget = null;
         }
+<<<<<<< Updated upstream
+=======
+
+
+        if (!isHungry) {
+            if (antalVila > 0) {
+                antalVila--;
+            }
+            if (antalVila <= 0) {
+                setHungry(true);
+                System.out.println("Geparden är nu hungrig");
+            }
+        }
+>>>>>>> Stashed changes
     }
 
     public boolean move() {

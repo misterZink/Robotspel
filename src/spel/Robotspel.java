@@ -29,10 +29,12 @@ public class Robotspel {
                 getNextRobotInDirection();
                 // Kolla om rotation på robot behövs här.
                 moveRobotsInDirection();
+                deleteDeadRobots();
             }
 
             printPlayfield();
             waitForInput();
+
             if (isFirstRun) {
                 isFirstRun = false;
             }
@@ -45,14 +47,13 @@ public class Robotspel {
     }
 
     private void deleteRobot(int x, int y) {
-         //if (playfield.getRobots()[x][y] != null) {
-             if (playfield.getRobots()[x][y].getDisplaySymbol() == 'Z') {
-                 Zebra zebra = (Zebra)playfield.getRobots()[x][y];
-                 if (zebra.isDead()) {
-                     playfield.getRobots()[x][y] = null;
-                 }
-             }
-         //}
+        if (playfield.getRobots()[x][y].getDisplaySymbol() == 'Z') {
+            Zebra zebra = (Zebra) playfield.getRobots()[x][y];
+            if (zebra.isDead()) {
+                zebraAmount--;
+                playfield.getRobots()[x][y] = null;
+            }
+        }
     }
 
     /**
@@ -126,8 +127,8 @@ public class Robotspel {
      * Varje cell åt höger är egentligen en cell neråt.
      */
     private void printPlayfield() {
-        final String playfieldAndFrmes = "-PLAYFIELD- Frames: " + frames;
-        System.out.println(playfieldAndFrmes);
+        final String gameStatusMessage = "-PLAYFIELD- Zebras left: " + zebraAmount + " Frames: " + frames;
+        System.out.println(gameStatusMessage);
 
         for (Robot[] x : playfield.getRobots()) {
             for (Robot y : x) {
@@ -191,11 +192,20 @@ public class Robotspel {
         for (int x = 0; x < playfield.getRobots().length; x++) {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
                 if (playfield.getRobots()[x][y] != null) {
-
                     playfield.getRobots()[x][y].setPositionX(x);
                     playfield.getRobots()[x][y].setPositionY(y);
                     playfield.getRobots()[x][y].update();
+                }
+            }
+        }
 
+
+    }
+
+    private void deleteDeadRobots() {
+        for (int x = 0; x < playfield.getRobots().length; x++) {
+            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+                if (playfield.getRobots()[x][y] != null) {
                     deleteRobot(x, y);
                 }
             }
