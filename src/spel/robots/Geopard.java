@@ -87,6 +87,9 @@ public class Geopard extends Robot implements Moveable {
         return antalVila;
     }
 
+    /**
+     * Denna metoden körs varje runda
+     */
     @Override
     public void update() {
         super.update();
