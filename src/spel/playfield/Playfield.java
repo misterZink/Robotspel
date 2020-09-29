@@ -7,15 +7,13 @@ import spel.robots.Zebra;
 import java.util.Random;
 
 public class Playfield {
-    /**
-     * 7 % att roboten spawnas
-     */
+
     private Robot[][] robots;
     final int spawnIntLimit = 100;
     final int spawnChance = 7;
 
     /**
-     * retunera roboten tillbacks till spelplanen
+     * retunera robotar
      * @return
      */
     public Robot[][] getRobots() {
@@ -69,7 +67,7 @@ public class Playfield {
     }
 
     /**
-     * Spawna antal rätt antal Zebra.
+     * Spawna antal rätt antal zebror.
      * @param amountOfZebras
      */
     public void spawnZebras(final int amountOfZebras) {

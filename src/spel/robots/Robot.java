@@ -6,7 +6,7 @@ import spel.robots.directions.Direction;
 import java.util.Random;
 
 /**
- *  Klasses som geopard och zebra ärver ifrån
+ * Klassen som geopard och zebra ärver ifrån
  */
 abstract public class Robot{
     private int positionX;
@@ -39,6 +39,7 @@ abstract public class Robot{
      * T.ex: Om trött antalSteg = 0. Else antalSteg = 1;
      */
     public void update() {
+        antalSteg = 1;
         decideDirection();
     }
 
@@ -100,6 +101,8 @@ abstract public class Robot{
             case 3 -> direction = Direction.RIGHT;
         }
     }
+
+
 
 
 }
