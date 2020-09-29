@@ -50,6 +50,7 @@ public class Robotspel {
                  Zebra zebra = (Zebra)playfield.getRobots()[x][y];
                  if (zebra.isDead()) {
                      playfield.getRobots()[x][y] = null;
+                     zebraAmount--;
                  }
              }
          //}
@@ -126,7 +127,7 @@ public class Robotspel {
      * Varje cell åt höger är egentligen en cell neråt.
      */
     private void printPlayfield() {
-        final String playfieldAndFrmes = "-PLAYFIELD- Frames: " + frames;
+        final String playfieldAndFrmes = "-PLAYFIELD- Zebras left: " + zebraAmount  + " Frames: " +  frames;
         System.out.println(playfieldAndFrmes);
 
         for (Robot[] x : playfield.getRobots()) {
