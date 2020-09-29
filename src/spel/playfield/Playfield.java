@@ -7,28 +7,40 @@ import spel.robots.Zebra;
 import java.util.Random;
 
 public class Playfield {
-    /** 7 % att roboten spawnas
-     *
+    /**
+     * 7 % att roboten spawnas
      */
     private Robot[][] robots;
     final int spawnIntLimit = 100;
     final int spawnChance = 7;
 
-    /** retunera roboten tillbacks till spelplanen
-     * 
+    /**
+     * retunera roboten tillbacks till spelplanen
      * @return
      */
     public Robot[][] getRobots() {
         return robots;
     }
 
+    /**
+     * Standard konstruktor för klassen
+     */
     public Playfield() {
     }
 
+    /**
+     * En konstruktor för klassen som tar in bredd och höjd för spelplanen
+     * @param width
+     * @param height
+     */
     public Playfield(final int width, final int height) {
         robots = new Robot[width][height];
     }
 
+    /**
+     * Spawna antal rätt antal geoparder.
+     * @param amountOfGeopards
+     */
     public void spawnGeopards(final int amountOfGeopards) {
         int cheetahsSpawned = 0;
         boolean allCheetahsSpawned = false;
@@ -56,6 +68,10 @@ public class Playfield {
         }
     }
 
+    /**
+     * Spawna antal rätt antal Zebra.
+     * @param amountOfZebras
+     */
     public void spawnZebras(final int amountOfZebras) {
         int zebrasSpawned = 0;
         boolean allZebrasSpawned = false;
