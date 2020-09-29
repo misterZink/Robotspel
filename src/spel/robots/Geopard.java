@@ -1,6 +1,6 @@
 package spel.robots;
 
-public class Geopard extends Robot implements Moveable{
+public class Geopard extends Robot implements Moveable {
 
     private boolean isHungry;
     private boolean isTired;
@@ -13,7 +13,7 @@ public class Geopard extends Robot implements Moveable{
         isHungry = true;
         isTired = false;
         antalVila = 0;
-        antalVilaFull = 2;
+        antalVilaFull = 3;
     }
 
     public void eatZebra(Zebra z) {
@@ -65,6 +65,17 @@ public class Geopard extends Robot implements Moveable{
 
             System.out.println("Gepard x: " + this.getPositionX() + " y: " + this.getPositionY() + " åt Zebra x: " + robotTarget.getPositionX() + " y: " + robotTarget.getPositionY());
             robotTarget = null;
+        }
+
+
+        if (!isHungry) {
+            if (antalVila > 0) {
+                antalVila--;
+            }
+            if (antalVila == 0) {
+                setHungry(true);
+                System.out.println("Geparden är nu hungrig");
+            }
         }
     }
 
