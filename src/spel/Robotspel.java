@@ -61,7 +61,9 @@ public class Robotspel {
                 isFirstRun = false;
             }
 
-            exit = !countRobots();
+            if (zebraAmount <= 0) {
+                exit = true;
+            }
             frames++;
         }
 
