@@ -23,11 +23,22 @@ public class Geopard extends Robot implements Moveable {
      * geopardens beteende, geoparden blir mätt efter den har ätit
      * @param z
      */
+
+    public boolean newPosSet = false;
+    public int newPosX, newPosY;
+
     public void eatZebra(Zebra z) {
         if (!z.isDead()) {
             z.setDead(true);
           
             System.out.println("Gepard x: " + this.getPositionY() + " y: " + this.getPositionX() + " åt Zebra x: " + robotTarget.getPositionY() + " y: " + robotTarget.getPositionX());
+
+            newPosX = z.getPositionX();
+            newPosY = z.getPositionY();
+            newPosSet = true;
+
+            //setPositionX(z.getPositionX());
+            //setPositionY(z.getPositionY());
           
             setHungry(false);
         }
@@ -97,7 +108,7 @@ public class Geopard extends Robot implements Moveable {
                 eatZebra((Zebra) robotTarget);
                 robotTarget = null;
             }
-        }        
+        }
 
         if (!isHungry) {
             if (antalVila > 0) {
