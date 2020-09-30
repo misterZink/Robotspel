@@ -9,8 +9,8 @@ import java.util.Random;
 public class Playfield {
 
     private Robot[][] robots;
-    final int spawnIntLimit = 100;
-    final int spawnChance = 7;
+    private final int spawnIntLimit = 100;
+    private final int spawnChance = 7;
 
     /**
      * retunera robotar
