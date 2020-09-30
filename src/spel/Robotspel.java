@@ -1,11 +1,9 @@
 package spel;
 
 import spel.playfield.Playfield;
-import spel.robots.Geopard;
 import spel.robots.Robot;
 import spel.robots.Zebra;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Robotspel {
@@ -16,7 +14,7 @@ public class Robotspel {
 
     /**
      * I loppen när den inte finmns någon robot ska användaren mata in antal Zebra
-     * geopard samt playfield storlek på spelplanen.
+     *  geopard samt playfield storlek på spelplanen.
      */
     public Robotspel() {
         while (!countRobots()) {
@@ -36,11 +34,21 @@ public class Robotspel {
         while (!exit) {
             if (!isFirstRun) {
                 updateAllRobots();
-                // Rotera om utanför arrays här.
                 getNextRobotInDirection();
+                // Kolla om rotation på robot behövs här.
                 moveRobotsInDirection();
-                deleteDeadZebras(); // ta bort döda zebror
-                moveCheetahsWithUpdatedPosition(); // för geoparder om de ätit upp en zebra
+                deleteDeadRobots();
+
+/*
+                for (int x = 0; x < playfield.getRobots().length; x++) {
+                    for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+                        if (playfield.getRobots()[x][y] != null) {
+                            playfield.getRobots()[x][y].setPositionX(x);
+                            playfield.getRobots()[x][y].setPositionY(y);
+                        }
+                    }
+                }
+ */
             }
 
             /* Skriver ut playfield på konsolen, inväntar input från
@@ -61,7 +69,7 @@ public class Robotspel {
         System.out.println("GAME QUIT");
     }
 
-    private void deleteDeadZebra(int x, int y) {
+    private void deleteRobot(int x, int y) {
         if (playfield.getRobots()[x][y].getDisplaySymbol() == 'Z') {
             Zebra zebra = (Zebra) playfield.getRobots()[x][y];
 
@@ -217,11 +225,11 @@ public class Robotspel {
         }
     }
 
-    private void deleteDeadZebras() {
+    private void deleteDeadRobots() {
         for (int x = 0; x < playfield.getRobots().length; x++) {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
                 if (playfield.getRobots()[x][y] != null) {
-                    deleteDeadZebra(x, y);
+                    deleteRobot(x, y);
                 }
             }
         }
@@ -283,26 +291,6 @@ public class Robotspel {
                         currentRobot.setPositionY(y);
 
                         currentRobot.setAntalSteg(currentRobot.getAntalSteg() - 1);
-                    }
-                }
-            }
-        }
-    }
-
-    private void moveCheetahsWithUpdatedPosition() {
-        for (int x = 0; x < playfield.getRobots().length; x++) {
-            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
-
-                if (playfield.getRobots()[x][y] != null) {
-
-                    if (playfield.getRobots()[x][y].getDisplaySymbol() == 'G') {
-                        final Geopard tempGeo = (Geopard) playfield.getRobots()[x][y];
-
-                        if (tempGeo.newPosSet) {
-                            playfield.getRobots()[tempGeo.newPosX][tempGeo.newPosY] = tempGeo;
-                            playfield.getRobots()[x][y] = null;
-                            tempGeo.newPosSet = false;
-                        }
                     }
                 }
             }
