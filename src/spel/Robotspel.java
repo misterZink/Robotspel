@@ -17,6 +17,10 @@ public class Robotspel {
      *  geopard samt playfield storlek på spelplanen.
      */
     public Robotspel() {
+        runGame();
+    }
+
+    private void runGame() {
         while (!countRobots()) {
             askAmountOfRobots();
         }
