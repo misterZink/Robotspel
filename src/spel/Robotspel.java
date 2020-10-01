@@ -4,6 +4,7 @@ import spel.playfield.Playfield;
 import spel.robots.Geopard;
 import spel.robots.Robot;
 import spel.robots.Zebra;
+import spel.robots.directions.Direction;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -35,12 +36,13 @@ public class Robotspel {
         boolean isFirstRun = true;
         while (!exit) {
             if (!isFirstRun) {
+                updateDirectionForAllRobots();
+                updateDirectionIfRobotAtEdge();
                 updateAllRobots();
-                // Rotera om utanför arrays här.
                 getNextRobotInDirection();
                 moveRobotsInDirection();
-                deleteDeadZebras(); // ta bort döda zebror
-                moveCheetahsWithUpdatedPosition(); // för geoparder om de ätit upp en zebra
+                deleteDeadZebras();
+                moveCheetahsWithUpdatedPosition();
             }
 
             /* Skriver ut playfield på konsolen, inväntar input från
@@ -57,9 +59,16 @@ public class Robotspel {
             frames++;
         }
 
-        System.out.println("GAME QUIT");
+        final String gameQuitMsg = "- Game Quit! -";
+        System.out.println(gameQuitMsg);
     }
 
+    /**
+     * Ta bort zebra från array om död. Minska antalet zebror.
+     *
+     * @param x
+     * @param y
+     */
     private void deleteDeadZebra(int x, int y) {
         if (playfield.getRobots()[x][y].getDisplaySymbol() == 'Z') {
             Zebra zebra = (Zebra) playfield.getRobots()[x][y];
@@ -77,11 +86,10 @@ public class Robotspel {
      * Inväntar input från användaren (metod).
      */
     private void waitForInput() {
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        final String pressKeyMsg = "- Press any key -";
+        System.out.println(pressKeyMsg);
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
@@ -144,7 +152,7 @@ public class Robotspel {
      * Varje cell åt höger är egentligen en cell neråt.
      */
     private void printPlayfield() {
-        final String gameStatusMessage = "-PLAYFIELD- Zebras left: " + zebraAmount + " Frames: " + frames;
+        final String gameStatusMessage = "- Playfield - Zebras left: " + zebraAmount + " Frames: " + frames;
         System.out.println(gameStatusMessage);
 
         for (Robot[] x : playfield.getRobots()) {
@@ -206,6 +214,9 @@ public class Robotspel {
         }
     }
 
+    /**
+     * Uppdaterar alla robotar.
+     */
     private void updateAllRobots() {
         for (int x = 0; x < playfield.getRobots().length; x++) {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
@@ -216,6 +227,9 @@ public class Robotspel {
         }
     }
 
+    /**
+     * för varje robot, ta bort död zebra
+     */
     private void deleteDeadZebras() {
         for (int x = 0; x < playfield.getRobots().length; x++) {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
@@ -288,6 +302,9 @@ public class Robotspel {
         }
     }
 
+    /**
+     * Kollar ifall gepard har fått ny position, isåfall får den nya positionen.
+     */
     private void moveCheetahsWithUpdatedPosition() {
         for (int x = 0; x < playfield.getRobots().length; x++) {
             for (int y = 0; y < playfield.getRobots()[x].length; y++) {
@@ -301,6 +318,72 @@ public class Robotspel {
                             playfield.getRobots()[tempGeo.newPosX][tempGeo.newPosY] = tempGeo;
                             playfield.getRobots()[x][y] = null;
                             tempGeo.newPosSet = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Uppdatera direction för alla robotar.
+     */
+    private void updateDirectionForAllRobots() {
+        for (int x = 0; x < playfield.getRobots().length; x++) {
+            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+                if (playfield.getRobots()[x][y] != null) {
+                    playfield.getRobots()[x][y].decideDirection();
+                }
+            }
+        }
+    }
+
+    /**
+     * Om roboten är en av kanterna och direction pekar utåt ändra direction: vänd 90 grader.
+     */
+    private void updateDirectionIfRobotAtEdge() {
+        for (int x = 0; x < playfield.getRobots().length; x++) {
+            for (int y = 0; y < playfield.getRobots()[x].length; y++) {
+                if (playfield.getRobots()[x][y] != null) {
+                    final Robot currentRobot = playfield.getRobots()[x][y];
+
+                    if (y == 0) { // längst åt vänster
+                        if (currentRobot.getDirection() == Direction.LEFT) {
+                            currentRobot.setDirection(Direction.DOWN);
+                            //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på VÄNSTER sidan! 1");
+                            if (x == playfield.getRobots().length - 1) {
+                                currentRobot.setDirection(Direction.RIGHT);
+                                //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på VÄNSTER sidan! 2");
+                            }
+                        }
+                    } else if (y == playfield.getRobots()[x].length - 1) { // längst åt höger
+                        if (currentRobot.getDirection() == Direction.RIGHT) {
+                            currentRobot.setDirection(Direction.UP);
+                            //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på HÖGRA sidan! 1");
+                            if (x == 0) {
+                                currentRobot.setDirection(Direction.LEFT);
+                                //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på HÖGRA sidan! 2");
+                            }
+                        }
+                    }
+
+                    if (x == 0) { // längst till upp
+                        if (currentRobot.getDirection() == Direction.UP) {
+                            currentRobot.setDirection(Direction.LEFT);
+                            //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på ÖVRE sidan! 1");
+                            if (y == 0) {
+                                currentRobot.setDirection(Direction.DOWN);
+                                //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på ÖVRE sidan! 2");
+                            }
+                        }
+                    } else if (x == playfield.getRobots().length - 1) { // längst ner
+                        if (currentRobot.getDirection() == Direction.DOWN) {
+                            currentRobot.setDirection(Direction.RIGHT);
+                            //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på UNDRE sidan! 1");
+                            if (y == playfield.getRobots()[x].length - 1) {
+                                currentRobot.setDirection(Direction.UP);
+                                //System.out.println("Robot X= " + x + " Y= " + y + " försökte gå ut på UNDRE sidan! 2");
+                            }
                         }
                     }
                 }

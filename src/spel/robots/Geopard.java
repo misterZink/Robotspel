@@ -36,9 +36,6 @@ public class Geopard extends Robot implements Moveable {
             newPosX = z.getPositionX();
             newPosY = z.getPositionY();
             newPosSet = true;
-
-            //setPositionX(z.getPositionX());
-            //setPositionY(z.getPositionY());
           
             setHungry(false);
         }
