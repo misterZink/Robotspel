@@ -45,17 +45,17 @@ public class Playfield {
         Random random = new Random();
 
         while (!allCheetahsSpawned) {
-            for (int j = 0; j < robots.length; j++) {
-                for (int k = 0; k < robots[j].length; k++) {
+            for (int x = 0; x < robots.length; x++) {
+                for (int y = 0; y < robots[x].length; y++) {
 
                     if (cheetahsSpawned < amountOfGeopards) {
-                        if (robots[j][k] == null) {
+                        if (robots[x][y] == null) {
                             final int toSpawn = random.nextInt(spawnIntLimit);
 
                             if (toSpawn < spawnChance) {
-                                robots[j][k] = new Geopard();
+                                robots[x][y] = new Geopard();
                                 cheetahsSpawned++;
-                                System.out.println("Geopard " + cheetahsSpawned + "/" + amountOfGeopards + " spawned @" + " [" + j + "][" + k + "]");
+                                System.out.println("Geopard " + cheetahsSpawned + "/" + amountOfGeopards + " spawned @" + " [" + x + "][" + y + "]");
                             }
                         }
                     } else {
@@ -76,17 +76,17 @@ public class Playfield {
         Random random = new Random();
 
         while (!allZebrasSpawned) {
-            for (int j = 0; j < robots.length; j++) {
-                for (int k = 0; k < robots[j].length; k++) {
+            for (int x = 0; x < robots.length; x++) {
+                for (int y = 0; y < robots[x].length; y++) {
 
                     if (zebrasSpawned < amountOfZebras) {
-                        if (robots[j][k] == null) {
+                        if (robots[x][y] == null) {
                             final int toSpawn = random.nextInt(spawnIntLimit);
 
                             if (toSpawn < spawnChance) {
-                                robots[j][k] = new Zebra();
+                                robots[x][y] = new Zebra();
                                 zebrasSpawned++;
-                                System.out.println("Zebra " + zebrasSpawned + "/" + amountOfZebras + " spawned @" + " [" + j + "][" + k + "]");
+                                System.out.println("Zebra " + zebrasSpawned + "/" + amountOfZebras + " spawned @" + " [" + x + "][" + y + "]");
                             }
                         }
                     } else {

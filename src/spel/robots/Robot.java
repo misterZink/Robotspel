@@ -40,7 +40,6 @@ abstract public class Robot{
      */
     public void update() {
         antalSteg = 1;
-        decideDirection();
     }
 
     /**
@@ -84,6 +83,10 @@ abstract public class Robot{
     public void setAntalSteg(int antalSteg)
     {
         this.antalSteg = antalSteg;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     /**
